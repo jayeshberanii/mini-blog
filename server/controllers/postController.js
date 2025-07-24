@@ -14,6 +14,18 @@ const getPosts = async(req, res) => {
     }
 }
 
+// Get a single post
+const getPost = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findById(id);
+        res.status(200).json(post);
+    } catch (error) {
+        console.log("Error while getting post");
+        res.status(500).json({ message: "Error while getting posts" });
+    }
+}
+
 // Create a new post
 const createPost = async(req, res) => {
     try {
@@ -42,5 +54,6 @@ const deletePost = async(req, res) => {
 module.exports = {
     getPosts,
     createPost,
-    deletePost
+    deletePost,
+    getPost
 }
